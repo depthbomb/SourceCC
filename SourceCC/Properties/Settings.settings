@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SourceCC.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TF2Folder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Steam\SteamApps\common\Team Fortress 2\tf</Value>
+    </Setting>
+    <Setting Name="L4D2Folder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Steam\SteamApps\common\Left 4 Dead 2\left4dead2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

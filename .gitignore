@@ -1,0 +1,6 @@
+/.vs
+bin/
+obj/
+publish/
+Thumbs.db
+*.pfx

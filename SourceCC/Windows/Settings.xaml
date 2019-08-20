@@ -1,0 +1,21 @@
+﻿<Window x:Class="SourceCC.Windows.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SourceCC.Windows"
+        mc:Ignorable="d"
+        Title="SourceCC Settings" Height="450" Width="476.923" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <StackPanel>
+        <Label Content="Team Fortress 2 Folder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="130"/>
+        <StackPanel Orientation="Horizontal" Margin="10,0">
+            <TextBox Name="tf2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
+            <Button Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeTf2_Click"/>
+        </StackPanel>
+        <Label Content="Left 4 Dead 2 Folder" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Height="26" Width="130"/>
+        <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+            <TextBox Name="l4d2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
+            <Button Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeL4d2_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
