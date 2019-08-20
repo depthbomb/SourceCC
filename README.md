@@ -6,7 +6,7 @@ This project was inspired by [Cache File Cleaner by Ah_Roon](https://gamebanana.
 - Support for multiple Source games
   - TF2 and L4D2 currently available
 - No installation required, run the app from anywhere
-- Ability to change directories if your installation differs from the norm
+- Ability to change directories if your game installation differs from the norm
 
 ### Requirements
 - This app requires _.NET Framework 4.5_ or higher.
