@@ -49,7 +49,19 @@ namespace SourceCC
             {
                 if (!Directory.Exists(dir))
                 {
-                    MessageBox.Show($"{dir} could not be located.\n\nIf your {game.ToUpper()} installation is in a different location then please change it in settings.", "Folder not found", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                    MessageBoxResult res = MessageBox.Show($"{dir} could not be located. If your {game.ToUpper()} installation is in a different location then please change it in settings.\n\nWould you like to open settings now?", "Folder not found", MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes);
+
+                    switch (res)
+                    {
+                        case MessageBoxResult.None:
+                        case MessageBoxResult.No:
+                            break;
+                        case MessageBoxResult.Yes:
+                        default:
+                            Windows.Settings settingsWindow = new Windows.Settings();
+                            settingsWindow.ShowDialog();
+                            break;
+                    }
                 }
                 else
                 {
