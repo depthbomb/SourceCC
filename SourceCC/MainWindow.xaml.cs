@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -69,6 +69,7 @@ namespace SourceCC
                 }
             }
 
+            resultsWindow.ScrollToEnd();
             directorySelector.IsEnabled = true;
             submitButton.IsEnabled = true;
         }
