@@ -47,8 +47,6 @@ namespace SourceCC
 
             if (dir != null)
             {
-                resultsWindow.Document.Blocks.Clear();
-
                 if (!Directory.Exists(dir))
                 {
                     MessageBox.Show($"{dir} could not be located.\n\nIf your {game.ToUpper()} installation is in a different location then please change it in settings.", "Folder not found", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
@@ -73,7 +71,9 @@ namespace SourceCC
         {
             string[] files = await Task.Run(() => Directory.GetFiles(dir, "*.cache", SearchOption.AllDirectories));
             int filesLength = files.Length;
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var watch = Stopwatch.StartNew();
+
+            resultsWindow.Document.Blocks.Clear();
 
             if (filesLength > 0)
             {
