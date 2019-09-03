@@ -74,10 +74,7 @@ namespace SourceCC
                     var cacheFiles = from f in di.EnumerateFiles()
                                      where f.Name.Contains(".cache")
                                      select f;
-
                     int filesLength = cacheFiles.Count();
-
-
 
                     if (filesLength > 0)
                     {
