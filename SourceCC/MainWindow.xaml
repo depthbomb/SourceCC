@@ -4,15 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="SourceCC" Height="260" Width="375" ResizeMode="NoResize" SizeToContent="Height">
+        Title="SourceCC" Height="260" Width="375" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <ComboBox Name="directorySelector" Margin="10,10,10,0">
             <ComboBoxItem Name="tf2" Content="Team Fortress 2" IsSelected="True"/>
             <ComboBoxItem Name="l4d2" Content="Left 4 Dead 2"/>
         </ComboBox>
         <StackPanel Orientation="Horizontal" Margin="10,10,10,0">
-            <Button Name="submitButton" Content="Clean It" Click="submitButton_Click" VerticalAlignment="Center" Margin="0,0,0,0" Width="269" />
-            <Button Name="settingsButton" Content="Settings" Click="settingsButton_Click" MaxWidth="60" Margin="10,0,0,0" VerticalAlignment="Center" Width="60"/>
+            <Button Name="submitButton" Content="Clean It!" Click="submitButton_Click" VerticalAlignment="Center" Margin="0,0,0,0" Width="339" />
         </StackPanel>
         <RichTextBox Name="resultsWindow" VerticalScrollBarVisibility="Visible" IsReadOnly="True" IsDocumentEnabled="True" FontFamily="Courier New" Foreground="#FF00FF09" Background="Black" Margin="10,10,10,0" Height="100">
             <RichTextBox.BorderBrush>
@@ -20,8 +19,13 @@
             </RichTextBox.BorderBrush>
             <FlowDocument/>
         </RichTextBox>
-        <TextBlock TextWrapping="Wrap" Margin="10" HorizontalAlignment="Right">
-            <Run>By</Run> <Hyperlink Click="authorLink_Click">depthbomb</Hyperlink>
-        </TextBlock>
+        <Grid Margin="0,10">
+            <TextBlock TextWrapping="Wrap" Margin="10,0,0,0" HorizontalAlignment="Left">
+                <Hyperlink Name="settingsButton" Click="settingsButton_Click"><Run Name="settingsButtonText">Settings</Run></Hyperlink>
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Run>♡</Run> <Hyperlink Click="authorLink_Click">depthbomb</Hyperlink>
+            </TextBlock>
+        </Grid>
     </StackPanel>
 </Window>

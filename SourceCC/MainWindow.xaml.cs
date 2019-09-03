@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
+using i18n = SourceCC.Classes.I18n;
+
 namespace SourceCC
 {
     /// <summary>
@@ -15,11 +17,8 @@ namespace SourceCC
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void authorLink_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://steamcommunity.com/id/minorin");
+            this.settingsButtonText.Text = i18n.__("settings");
+            this.submitButton.Content = i18n.__("begin_process");
         }
 
         private void submitButton_Click(object sender, RoutedEventArgs e)
@@ -33,7 +32,7 @@ namespace SourceCC
             submitButton.IsEnabled = false;
 
             resultsWindow.Document.Blocks.Clear();
-            resultsWindow.Document.Blocks.Add(new Paragraph(new Run($"Processing...")));
+            resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_started"))));
 
             switch (game)
             {
@@ -52,7 +51,7 @@ namespace SourceCC
             {
                 if (!Directory.Exists(dir))
                 {
-                    MessageBoxResult res = MessageBox.Show($"{dir} could not be located. If your {game.ToUpper()} installation is in a different location then please change it in settings.\n\nWould you like to open settings now?", "Folder not found", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
+                    MessageBoxResult res = MessageBox.Show(i18n.__("folder_not_found_text", dir, game.ToUpper()), i18n.__("folder_not_found_caption"), MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
 
                     switch (res)
                     {
@@ -87,19 +86,19 @@ namespace SourceCC
                             if (File.Exists(file))
                             {
                                 File.Delete(file);
-                                string line = $"Deleted {Path.GetFileName(file)}";
+                                string line = i18n.__("process_deleted_file", Path.GetFileName(file));
                                 resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
                             }
                         }
                     }
                     else
                     {
-                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run("Wow! This game folder is already clean!")));
+                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_already_clean"))));
                     }
 
                     watch.Stop();
                     long elapsedMs = watch.ElapsedMilliseconds;
-                    resultsWindow.Document.Blocks.Add(new Paragraph(new Run($"Finished operation in {elapsedMs}ms.")));
+                    resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_completed", elapsedMs.ToString()))));
                 }
             }
 
@@ -112,6 +111,11 @@ namespace SourceCC
         {
             Windows.Settings settingsWindow = new Windows.Settings();
             settingsWindow.ShowDialog();
+        }
+
+        private void authorLink_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/id/minorin");
         }
     }
 }
