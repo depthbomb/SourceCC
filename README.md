@@ -1,5 +1,5 @@
 <div align="center">
-	<h1><u>Source</u> <u>C</u>ache <u>C</u>leaner</h1>
+	<h1><code>Source</code> <code>C</code>ache <code>C</code>leaner</h1>
 </div>
 
 This project was inspired by [Cache File Cleaner by Ah_Roon](https://gamebanana.com/tools/6688) to expand on the functionality and to practice my C#.
