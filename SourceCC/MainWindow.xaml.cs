@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 
 using i18n = SourceCC.Classes.I18n;
+using System.Threading.Tasks;
 
 namespace SourceCC
 {
@@ -71,33 +72,25 @@ namespace SourceCC
                 {
                     resultsWindow.Document.Blocks.Clear();
                     var watch = Stopwatch.StartNew();
+                    int foundFiles = 0;
 
-                    DirectoryInfo di = new DirectoryInfo(dir);
-                    var cacheFiles = from f in di.EnumerateFiles()
-                                     where f.Name.Contains(".cache")
-                                     select f;
-                    int filesLength = cacheFiles.Count();
-
-                    if (filesLength > 0)
+                    foreach (string file in Directory.EnumerateFiles(dir, "*.cache", SearchOption.AllDirectories))
                     {
-                        foreach (var f in cacheFiles)
+                        if (File.Exists(file))
                         {
-                            string file = f.FullName;
-                            if (File.Exists(file))
-                            {
-                                File.Delete(file);
-                                string line = i18n.__("process_deleted_file", Path.GetFileName(file));
-                                resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
-                            }
+                            File.Delete(file);
+                            string line = i18n.__("process_deleted_file", file);
+                            resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
+                            foundFiles++;
                         }
-                    }
-                    else
-                    {
-                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_already_clean"))));
                     }
 
                     watch.Stop();
                     long elapsedMs = watch.ElapsedMilliseconds;
+                    if (foundFiles == 0)
+                    {
+                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_already_clean"))));
+                    }
                     resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_completed", elapsedMs.ToString()))));
                 }
             }
