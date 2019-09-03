@@ -15,6 +15,13 @@ namespace SourceCC.Windows
             string tf2Folder = settings.TF2Folder;
             string l4d2Folder = settings.L4D2Folder;
 
+            if (!settings.SeenOsArchMessage)
+            {
+                MessageBox.Show($"I have detected that you are using a {(Classes.Constants.Is64BitOs ? "64bit" : "32bit")} operating system and the default directories have been set accordingly. If this is incorrect then you should change them.\n\nThis message will only be displayed this one time.", "Default Paths Set", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
+                settings.SeenOsArchMessage = true;
+                settings.Save();
+            }
+
             this.tf2Folder.Text = tf2Folder;
             this.l4d2Folder.Text = l4d2Folder;
         }

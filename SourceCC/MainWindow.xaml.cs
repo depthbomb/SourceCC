@@ -27,6 +27,7 @@ namespace SourceCC
             ComboBoxItem ComboItem = (ComboBoxItem)directorySelector.SelectedItem;
             string game = ComboItem.Name;
             string dir;
+            string exe; //  Currently not used other than to be re-assigned later. May be used as a sort of way of "validating" chosen folders by looking for the game executable.
 
             directorySelector.IsEnabled = false;
             submitButton.IsEnabled = false;
@@ -39,9 +40,11 @@ namespace SourceCC
                 case "tf2":
                 default:
                     dir = Properties.Settings.Default.TF2Folder;
+                    exe = "hl2.exe";
                     break;
                 case "l4d2":
                     dir = Properties.Settings.Default.L4D2Folder;
+                    exe = "left4dead2.exe";
                     break;
             }
 

@@ -46,5 +46,17 @@ namespace SourceCC.Properties {
                 this["L4D2Folder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SeenOsArchMessage {
+            get {
+                return ((bool)(this["SeenOsArchMessage"]));
+            }
+            set {
+                this["SeenOsArchMessage"] = value;
+            }
+        }
     }
 }
