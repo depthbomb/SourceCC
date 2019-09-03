@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -20,7 +22,7 @@ namespace SourceCC
             this.submitButton.Content = i18n.__("begin_process");
         }
 
-        private void submitButton_Click(object sender, RoutedEventArgs e)
+        private async void submitButton_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxItem ComboItem = (ComboBoxItem)directorySelector.SelectedItem;
             string game = ComboItem.Name;
@@ -68,24 +70,23 @@ namespace SourceCC
                 }
                 else
                 {
-                    resultsWindow.Document.Blocks.Clear();
                     var watch = Stopwatch.StartNew();
                     int foundFiles = 0;
 
-                    foreach (string file in Directory.EnumerateFiles(dir, "*.cache", SearchOption.AllDirectories))
+                    var deletedFile = new Progress<string>(file =>
                     {
-                        if (File.Exists(file))
-                        {
-                            File.Delete(file);
-                            string line = i18n.__("process_deleted_file", file);
-                            resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
-                            foundFiles++;
-                        }
-                    }
+                        string line = i18n.__("process_deleted_file", file);
+                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
+                    });
+
+                    await Task.Run(() =>
+                    {
+                        DeleteFiles(dir, deletedFile, out foundFiles);
+                    });
 
                     watch.Stop();
                     long elapsedMs = watch.ElapsedMilliseconds;
-                    if (foundFiles == 0)
+                    if (foundFiles < 1)
                     {
                         resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_already_clean"))));
                     }
@@ -100,6 +101,22 @@ namespace SourceCC
             resultsWindow.ScrollToEnd();
             directorySelector.IsEnabled = true;
             submitButton.IsEnabled = true;
+        }
+
+        private void DeleteFiles(string dir, IProgress<string> deletedFile, out int foundFiles)
+        {
+            int ff = 0;
+            foreach (string file in Directory.EnumerateFiles(dir, "*.cache", SearchOption.AllDirectories))
+            {
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                    ff++;
+                    deletedFile.Report(file);
+                }
+            }
+
+            foundFiles = ff;
         }
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)
