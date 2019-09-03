@@ -4,15 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="SourceCC" Height="260" Width="375" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+        Title="SourceCC" Height="278.044" Width="375" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <ComboBox Name="directorySelector" Margin="10,10,10,0">
             <ComboBoxItem Name="tf2" Content="Team Fortress 2" IsSelected="True"/>
             <ComboBoxItem Name="l4d2" Content="Left 4 Dead 2"/>
         </ComboBox>
-        <StackPanel Orientation="Horizontal" Margin="10,10,10,0">
-            <Button Name="submitButton" Content="Clean It!" Click="submitButton_Click" VerticalAlignment="Center" Margin="0,0,0,0" Width="339" />
-        </StackPanel>
+        <Button Name="submitButton" Content="Clean It!" Click="submitButton_Click" VerticalAlignment="Center" Margin="10,10,10,0" />
         <RichTextBox Name="resultsWindow" VerticalScrollBarVisibility="Visible" IsReadOnly="True" IsDocumentEnabled="True" FontFamily="Courier New" Foreground="#FF00FF09" Background="Black" Margin="10,10,10,0" Height="100">
             <RichTextBox.BorderBrush>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
