@@ -149,12 +149,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\SourceCCIconPng.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SourceCCIcon.png" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="SourceCCIcon.ico" />
