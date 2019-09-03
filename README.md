@@ -5,8 +5,8 @@
 This project was inspired by [Cache File Cleaner by Ah_Roon](https://gamebanana.com/tools/6688) to expand on the functionality and to practice my C#.
 
 ### Usage
-Simply choose the game you wish to clean up and press the big button.
-The directories that are set by default are the most common ones that the games may be located. You may change these directories by clicking the **Settings** button.
+Simply choose the game you wish to clean up and press the big *Clean It!* button.
+The directories that are set by default are the most common ones that the games may be located. You may change these directories in the **Settings**.
 
 For the best result, choose the `Team Fortress 2\tf` folder for TF2 and the `\Left 4 Dead 2\left4dead2` folder for L4D2.
 
