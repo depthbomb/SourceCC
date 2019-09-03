@@ -25,6 +25,7 @@ namespace SourceCC.Classes
                     dict["process_started"] = "Processing...";
                     dict["process_deleted_file"] = "Deleted {0}";
                     dict["process_already_clean"] = "Wow! This game folder is already clean!";
+                    dict["process_total_deleted"] = "Deleted {0} files(s)";
                     dict["process_completed"] = "Finished process in {0}ms.";
 
                     //  Non-existent path error
@@ -45,6 +46,7 @@ namespace SourceCC.Classes
                     dict["process_started"] = "Trabajando...";
                     dict["process_deleted_file"] = "Eliminado {0}";
                     dict["process_already_clean"] = "¡Caray! ¡La carpeta del juego ya se ha limpiado!";
+                    dict["process_total_deleted"] = "{0} archivos eliminados";
                     dict["process_completed"] = "Proceso completado en {0}ms";
 
                     dict["folder_not_found_text"] = "{0} no se pudo encontrar. Si su carpeta {1} está en una ubicación diferente, cámbiela en su configuración.\n\n¿Desea abrir la configuración ahora ? ";

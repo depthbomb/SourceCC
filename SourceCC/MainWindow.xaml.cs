@@ -89,6 +89,10 @@ namespace SourceCC
                     {
                         resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_already_clean"))));
                     }
+                    else
+                    {
+                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_total_deleted", foundFiles.ToString()))));
+                    }
                     resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_completed", elapsedMs.ToString()))));
                 }
             }
