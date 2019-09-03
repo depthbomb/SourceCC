@@ -1,12 +1,10 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
 using i18n = SourceCC.Classes.I18n;
-using System.Threading.Tasks;
 
 namespace SourceCC
 {
