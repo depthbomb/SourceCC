@@ -1,7 +1,7 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -22,7 +22,7 @@ namespace SourceCC
             Process.Start("https://steamcommunity.com/id/minorin");
         }
 
-        private async void submitButton_Click(object sender, RoutedEventArgs e)
+        private void submitButton_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxItem ComboItem = (ComboBoxItem)directorySelector.SelectedItem;
             string game = ComboItem.Name;
@@ -67,7 +67,39 @@ namespace SourceCC
                 }
                 else
                 {
-                    await DeleteFiles(dir);
+                    resultsWindow.Document.Blocks.Clear();
+                    var watch = Stopwatch.StartNew();
+
+                    DirectoryInfo di = new DirectoryInfo(dir);
+                    var cacheFiles = from f in di.EnumerateFiles()
+                                     where f.Name.Contains(".cache")
+                                     select f;
+
+                    int filesLength = cacheFiles.Count();
+
+
+
+                    if (filesLength > 0)
+                    {
+                        foreach (var f in cacheFiles)
+                        {
+                            string file = f.FullName;
+                            if (File.Exists(file))
+                            {
+                                File.Delete(file);
+                                string line = $"Deleted {Path.GetFileName(file)}";
+                                resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run("Wow! This game folder is already clean!")));
+                    }
+
+                    watch.Stop();
+                    long elapsedMs = watch.ElapsedMilliseconds;
+                    resultsWindow.Document.Blocks.Add(new Paragraph(new Run($"Finished operation in {elapsedMs}ms.")));
                 }
             }
 
@@ -80,36 +112,6 @@ namespace SourceCC
         {
             Windows.Settings settingsWindow = new Windows.Settings();
             settingsWindow.ShowDialog();
-        }
-
-        private async Task DeleteFiles(string dir)
-        {
-            string[] files = await Task.Run(() => Directory.GetFiles(dir, "*.cache", SearchOption.AllDirectories));
-            int filesLength = files.Length;
-            var watch = Stopwatch.StartNew();
-
-            resultsWindow.Document.Blocks.Clear();
-
-            if (filesLength > 0)
-            {
-                foreach (string file in files)
-                {
-                    if (File.Exists(file))
-                    {
-                        File.Delete(file);
-                        string line = $"Deleted {Path.GetFileName(file)}";
-                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
-                    }
-                }
-            }
-            else
-            {
-                resultsWindow.Document.Blocks.Add(new Paragraph(new Run("Wow! This game folder is already clean!")));
-            }
-
-            watch.Stop();
-            long elapsedMs = watch.ElapsedMilliseconds;
-            resultsWindow.Document.Blocks.Add(new Paragraph(new Run($"Finished operation in {elapsedMs}ms.")));
         }
     }
 }
