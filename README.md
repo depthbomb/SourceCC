@@ -8,15 +8,16 @@ This project was inspired by [Cache File Cleaner by Ah_Roon](https://gamebanana.
 Simply choose the game you wish to clean up and press the big *Clean It!* button.
 The directories that are set by default are the most common ones that the games may be located. You may change these directories in the **Settings**.
 
-For the best result, choose the `Team Fortress 2\tf` folder for TF2 and the `\Left 4 Dead 2\left4dead2` folder for L4D2.
+For the best result, choose the `Team Fortress 2\tf` folder for TF2 and the `Left 4 Dead 2\left4dead2` folder for L4D2.
 
 As far as I know, you shouldn't find any .cache files in the *left4dead2_dlc#* folders.
 
 ### Features
 - Support for multiple Source games
   - TF2 and L4D2 currently available
-- No installation required, run the app from anywhere
 - Ability to change directories if your game installation differs from the norm
+- Optional Windows Service
+  - Run the `SourceCC.Service.Manager.exe` in your installation directory to install and configure the service
 
 ### Requirements
 - This app requires _.NET Framework 4.5_ or higher.
