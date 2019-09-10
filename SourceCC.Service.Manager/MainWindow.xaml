@@ -1,0 +1,33 @@
+﻿<Window x:Class="SourceCC.Service.Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="SourceCC Service Manager" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <GroupBox Header="SourceCC Service Manager" MaxWidth="400" Margin="10">
+            <StackPanel Margin="5">
+                <TextBlock TextWrapping="Wrap">
+                    <Run>The SourceCC Service is a program that runs automatically in the background that will clean files on an interval that you set. The service can be installed or uninstalled here.</Run>
+                </TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Install/Uninstall" MaxWidth="400" MinHeight="50" Margin="10,0,10,10">
+            <StackPanel Margin="5">
+                <Button Name="installationButton" Content="Install Service" Height="25" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Check Interval" MaxWidth="400" MinHeight="50" Margin="10,0,10,10">
+            <StackPanel Margin="5">
+                <ComboBox Name="checkIntervalComboBox" Height="25" DropDownClosed="checkInterval_DropDownClosed">
+                    <ComboBoxItem Name="hourly">Once an hour</ComboBoxItem>
+                    <ComboBoxItem Name="daily">Once a day</ComboBoxItem>
+                    <ComboBoxItem Name="weekly">Once a week</ComboBoxItem>
+                    <ComboBoxItem Name="monthly">Once a month</ComboBoxItem>
+                    <ComboBoxItem Name="yearly">Once a year</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</Window>

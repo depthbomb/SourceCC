@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.IO;
+using System.Windows;
 
-using i18n = SourceCC.Classes.I18n;
+using CaprineNet.INI;
 
 namespace SourceCC.Windows
 {
@@ -10,15 +10,16 @@ namespace SourceCC.Windows
     /// </summary>
     public partial class Settings : Window
     {
+        private INI Config = new INI(Classes.Constants.ConfigPath);
+
         public Settings()
         {
             InitializeComponent();
 
-            this.Title = i18n.__("settings");
-
             var settings = Properties.Settings.Default;
-            string tf2Folder = settings.TF2Folder;
-            string l4d2Folder = settings.L4D2Folder;
+
+            string tf2Folder = Config.Read("Tf2", "Folders");
+            string l4d2Folder = Config.Read("L4d2", "Folders");
 
             if (!settings.SeenOsArchMessage)
             {
@@ -27,41 +28,8 @@ namespace SourceCC.Windows
                 settings.Save();
             }
 
-            string changeButtonText = i18n.__("change_folder");
-
             this.tf2Folder.Text = tf2Folder;
             this.l4d2Folder.Text = l4d2Folder;
-
-            this.changeTf2Folder.Content = changeButtonText;
-            this.changeL4d2Folder.Content = changeButtonText;
-
-            //  Does this really need to be this complicated?
-            foreach (ComboBoxItem item in this.languageSelector.Items)
-            {
-                if (item.Name == Classes.Constants.Language) {
-                    this.languageSelector.SelectedItem = item;
-                    break;
-                }
-            }
-        }
-
-        private void LanguageSelector_DropDownClosed(object sender, System.EventArgs e)
-        {
-            ComboBoxItem ComboItem = (ComboBoxItem)languageSelector.SelectedItem;
-            string lang = ComboItem.Name;
-            Properties.Settings.Default.Language = lang;
-            Properties.Settings.Default.Save();
-
-            if (!Properties.Settings.Default.SeenLanguageRestartMessage)
-            {
-                MessageBoxResult res = MessageBox.Show("The program will now be restarted so the language change can take effect.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                Properties.Settings.Default.SeenLanguageRestartMessage = true;
-                Properties.Settings.Default.Save();
-            }
-
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
         }
 
         private void changeTf2_Click(object sender, RoutedEventArgs e)
@@ -69,10 +37,7 @@ namespace SourceCC.Windows
             string newFolder = ChooseFolder();
             if (newFolder != null)
             {
-                Properties.Settings.Default.TF2Folder = newFolder;
-                Properties.Settings.Default.Save();
-                Properties.Settings.Default.Reload();
-
+                Config.Write("tf2", newFolder, "Folders");
                 this.tf2Folder.Text = newFolder;
             }
         }
@@ -82,10 +47,7 @@ namespace SourceCC.Windows
             string newFolder = ChooseFolder();
             if (newFolder != null)
             {
-                Properties.Settings.Default.L4D2Folder = newFolder;
-                Properties.Settings.Default.Save();
-                Properties.Settings.Default.Reload();
-
+                Config.Write("l4d2", newFolder, "Folders");
                 this.l4d2Folder.Text = newFolder;
             }
         }

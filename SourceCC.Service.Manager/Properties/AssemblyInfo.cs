@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SourceCC")]
-[assembly: AssemblyDescription("Source Cache Cleaner")]
+[assembly: AssemblyTitle("SourceCC.Service.Manager")]
+[assembly: AssemblyDescription("Source Cache Cleaner Service Manager")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Caprine Logic")]
-[assembly: AssemblyProduct("SourceCC")]
+[assembly: AssemblyProduct("SourceCC.Service.Manager")]
 [assembly: AssemblyCopyright("Copyright © 2014 - 2019")]
 [assembly: AssemblyTrademark("Caprine Logic")]
 [assembly: AssemblyCulture("")]

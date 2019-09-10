@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-using i18n = SourceCC.Classes.I18n;
+using CaprineNet.INI;
 
 namespace SourceCC
 {
@@ -18,8 +18,14 @@ namespace SourceCC
         public MainWindow()
         {
             InitializeComponent();
-            this.settingsButtonText.Text = i18n.__("settings");
-            this.submitButton.Content = i18n.__("begin_process");
+            if (!File.Exists(Path.Combine(Classes.Constants.DataPath, "SourceCC.ini")))
+            {
+                Directory.CreateDirectory(Classes.Constants.DataPath);
+
+                INI cfg = new INI(Classes.Constants.ConfigPath);
+                cfg.Write("Tf2", Classes.Constants.TF2DefaultPath, "Folders");
+                cfg.Write("L4d2", Classes.Constants.L4D2DefaultPath, "Folders");
+            }
         }
 
         private async void submitButton_Click(object sender, RoutedEventArgs e)
@@ -27,24 +33,21 @@ namespace SourceCC
             ComboBoxItem ComboItem = (ComboBoxItem)directorySelector.SelectedItem;
             string game = ComboItem.Name;
             string dir;
-            string exe; //  Currently not used other than to be re-assigned later. May be used as a sort of way of "validating" chosen folders by looking for the game executable.
 
             directorySelector.IsEnabled = false;
             submitButton.IsEnabled = false;
 
             resultsWindow.Document.Blocks.Clear();
-            resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_started"))));
+            resultsWindow.Document.Blocks.Add(new Paragraph(new Run("Processing...")));
 
             switch (game)
             {
                 case "tf2":
                 default:
                     dir = Properties.Settings.Default.TF2Folder;
-                    exe = "hl2.exe";
                     break;
                 case "l4d2":
                     dir = Properties.Settings.Default.L4D2Folder;
-                    exe = "left4dead2.exe";
                     break;
             }
 
@@ -52,7 +55,7 @@ namespace SourceCC
             {
                 if (!Directory.Exists(dir))
                 {
-                    MessageBoxResult res = MessageBox.Show(i18n.__("folder_not_found_text", dir, game.ToUpper()), i18n.__("folder_not_found_caption"), MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
+                    MessageBoxResult res = MessageBox.Show($"{dir} could not be located. If your {game.ToUpper()} installation is in a different location then please change it in settings.\n\nWould you like to open settings now?", "Folder not found", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
 
                     switch (res)
                     {
@@ -75,7 +78,7 @@ namespace SourceCC
 
                     var deletedFile = new Progress<string>(file =>
                     {
-                        string line = i18n.__("process_deleted_file", file);
+                        string line = $"Deleted {file}";
                         resultsWindow.Document.Blocks.Add(new Paragraph(new Run(line)));
                     });
 
@@ -88,13 +91,14 @@ namespace SourceCC
                     long elapsedMs = watch.ElapsedMilliseconds;
                     if (foundFiles < 1)
                     {
-                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_already_clean"))));
+                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run("Wow! This game folder is already clean!")));
                     }
                     else
                     {
-                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_total_deleted", foundFiles.ToString()))));
+                        resultsWindow.Document.Blocks.Add(new Paragraph(new Run($"Deleted {foundFiles} files(s)")));
                     }
-                    resultsWindow.Document.Blocks.Add(new Paragraph(new Run(i18n.__("process_completed", elapsedMs.ToString()))));
+
+                    resultsWindow.Document.Blocks.Add(new Paragraph(new Run($"Finished process in {elapsedMs}ms.")));
                 }
             }
 

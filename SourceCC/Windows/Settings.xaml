@@ -16,12 +16,5 @@
             <TextBox Name="l4d2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
             <Button Name="changeL4d2Folder" Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeL4d2_Click"/>
         </StackPanel>
-        <Label Content="Language" HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" Height="26" Width="130"/>
-        <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
-            <ComboBox Name="languageSelector" DropDownClosed="LanguageSelector_DropDownClosed">
-                <ComboBoxItem Name="en" Content="English" IsSelected="True"/>
-                <ComboBoxItem Name="es" Content="Spanish"/>
-            </ComboBox>
-        </StackPanel>
     </StackPanel>
 </Window>

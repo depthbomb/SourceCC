@@ -4,3 +4,4 @@ obj/
 publish/
 Thumbs.db
 *.pfx
+/iss/*.exe
