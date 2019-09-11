@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SourceCC"
-#define MyAppVersion "1.1.0"
+#define MyAppVersion "1.1.1"
 #define MyAppPublisher "Caprine Logic"
 #define MyAppURL "https://caprine.net"
 #define MyAppExeName "SourceCC.exe"
@@ -26,11 +26,12 @@ UsedUserAreasWarning=no
 ;PrivilegesRequired=lowest
 OutputDir=.\
 OutputBaseFilename=scc_setup
-SetupIconFile=.\SourceCCIcon.ico
+SetupIconFile=..\icons\app_icons\icon.ico
 Compression=lzma/ultra64
 SolidCompression=yes
-WizardStyle=modern
-WizardSmallImageFile=.\wizard_images\small_image_55x55.bmp,.\wizard_images\small_image_64x68.bmp
+WizardStyle=classic
+WizardSmallImageFile=.\wizard_images\wizard_small_image_100.bmp,.\wizard_images\wizard_small_image_150.bmp,.\wizard_images\wizard_small_image_200.bmp
+WizardImageFile=.\wizard_images\wizard_image_100.bmp,.\wizard_images\wizard_image_150.bmp,.\wizard_images\wizard_image_200.bmp
 WizardResizable=no
 
 [Languages]
