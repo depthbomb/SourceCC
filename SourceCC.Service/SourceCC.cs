@@ -19,6 +19,8 @@ namespace SourceCC.Service
         private static string pathsConfigFile = Path.Combine(dataPath, "SourceCC.ini");
         private static string logFolder = Path.Combine(dataPath, "Service Logs");
 
+        List<string> targetFiles = new List<string>() { ".cache" };
+
         public SourceCC()
         {
             InitializeComponent();
@@ -32,6 +34,9 @@ namespace SourceCC.Service
             t.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
                 INI config = new INI(serviceConfigFile);
+
+                if (config.KeyExists("DeleteZtmp", "Files") && bool.Parse(config.Read("DeleteZtmp", "Files")))
+                    targetFiles.Add(".ztmp");
 
                 int now = new UnixTimestamp().Timestamp;
                 int nextRun = int.Parse(config.Read("NextRun", "Operation"));
@@ -110,7 +115,11 @@ namespace SourceCC.Service
         {
         }
 
-        //  Formats a string for use in logging
+        /// <summary>
+        /// Formats a string for use in logging
+        /// </summary>
+        /// <param name="line">String to format into a "log line"</param>
+        /// <returns>Formatted line</returns>
         private string LogLine(string line)
         {
             string prefix = $"[{DateTime.Now.ToString("HH:mm:ss")}]";

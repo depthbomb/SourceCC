@@ -30,6 +30,7 @@ namespace SourceCC.Windows
 
             this.tf2Folder.Text = tf2Folder;
             this.l4d2Folder.Text = l4d2Folder;
+            this.filesZtmp.IsChecked = bool.Parse(Config.Read("DeleteZtmp", "Files"));
         }
 
         private void changeTf2_Click(object sender, RoutedEventArgs e)
@@ -64,6 +65,16 @@ namespace SourceCC.Windows
             {
                 return null;
             }
+        }
+
+        private void FilesZtmp_Checked(object sender, RoutedEventArgs e)
+        {
+            Config.Write("DeleteZtmp", "true", "Files");
+        }
+
+        private void FilesZtmp_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Config.Write("DeleteZtmp", "false", "Files");
         }
     }
 }

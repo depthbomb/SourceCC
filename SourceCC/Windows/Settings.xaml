@@ -4,17 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="476.923" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Settings" Height="450" Width="515" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <StackPanel>
-        <Label Content="Team Fortress 2" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="130"/>
-        <StackPanel Orientation="Horizontal" Margin="10,0">
-            <TextBox Name="tf2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
-            <Button Name="changeTf2Folder" Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeTf2_Click"/>
-        </StackPanel>
-        <Label Content="Left 4 Dead 2" HorizontalAlignment="Left" Margin="10,20,10,0" VerticalAlignment="Top" Height="26" Width="130"/>
-        <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
-            <TextBox Name="l4d2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
-            <Button Name="changeL4d2Folder" Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeL4d2_Click"/>
-        </StackPanel>
+        <GroupBox Header="Folders" Margin="10,0,10,10">
+            <StackPanel>
+                <Label Content="Team Fortress 2" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="130"/>
+                <StackPanel Orientation="Horizontal" Margin="5,0">
+                    <TextBox Name="tf2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
+                    <Button Name="changeTf2Folder" Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeTf2_Click"/>
+                </StackPanel>
+                <Label Content="Left 4 Dead 2" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="130"/>
+                <StackPanel Orientation="Horizontal" Margin="5,0,5,10">
+                    <TextBox Name="l4d2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
+                    <Button Name="changeL4d2Folder" Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeL4d2_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Files" Margin="10,0,10,10">
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <CheckBox Name="filesZtmp" HorizontalAlignment="Left" Content=".ztmp" Checked="FilesZtmp_Checked" Unchecked="FilesZtmp_Unchecked" />
+            </StackPanel>
+        </GroupBox>
     </StackPanel>
 </Window>

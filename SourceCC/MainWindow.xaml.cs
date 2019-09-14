@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Collections.Generic;
 
 using CaprineNet.INI;
 
@@ -15,17 +17,13 @@ namespace SourceCC
     /// </summary>
     public partial class MainWindow : Window
     {
+        INI Config;
+        List<string> targetFiles = new List<string>() { ".cache" };
+
         public MainWindow()
         {
             InitializeComponent();
-            if (!File.Exists(Path.Combine(Classes.Constants.DataPath, "SourceCC.ini")))
-            {
-                Directory.CreateDirectory(Classes.Constants.DataPath);
-
-                INI cfg = new INI(Classes.Constants.ConfigPath);
-                cfg.Write("Tf2", Classes.Constants.TF2DefaultPath, "Folders");
-                cfg.Write("L4d2", Classes.Constants.L4D2DefaultPath, "Folders");
-            }
+            LoadConfig();
         }
 
         private async void submitButton_Click(object sender, RoutedEventArgs e)
@@ -109,8 +107,15 @@ namespace SourceCC
 
         private void DeleteFiles(string dir, IProgress<string> deletedFile, out int foundFiles)
         {
+            //  Before we start deleting files, let's read the config and update the list of files to look for from the config.
+            //  Todo: rewrite this system
+            if (Config.KeyExists("DeleteZtmp", "Files") && bool.Parse(Config.Read("DeleteZtmp", "Files")))
+                targetFiles.Add(".ztmp");
+
+            //  Time to start looking through files!
             int ff = 0;
-            foreach (string file in Directory.EnumerateFiles(dir, "*.cache", SearchOption.AllDirectories))
+            foreach (string file in Directory.EnumerateFiles(dir, "*.*", SearchOption.AllDirectories)
+                .ToArray().Where(s => targetFiles.Any(ext => ext == Path.GetExtension(s))))
             {
                 if (File.Exists(file))
                 {
@@ -132,6 +137,25 @@ namespace SourceCC
         private void authorLink_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://steamcommunity.com/id/minorin");
+        }
+
+        private void LoadConfig()
+        {
+            string configPath = Classes.Constants.ConfigPath;
+            if (!File.Exists(configPath))
+            {
+                Directory.CreateDirectory(Classes.Constants.DataPath);
+
+                INI cfg = new INI(configPath);
+                cfg.Write("Tf2", Classes.Constants.TF2DefaultPath, "Folders");
+                cfg.Write("L4d2", Classes.Constants.L4D2DefaultPath, "Folders");
+                cfg.Write("DeleteZtmp", "true", "Files");
+                Config = cfg;
+            }
+            else
+            {
+                Config = new INI(configPath);
+            }
         }
     }
 }
