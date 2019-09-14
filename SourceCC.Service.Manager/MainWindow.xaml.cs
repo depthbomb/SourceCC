@@ -51,15 +51,16 @@ namespace SourceCC.Service.Manager
             {
                 Directory.CreateDirectory(logFolder);
             }
-            LoadConfigFile();
+            LoadConfig();
             InitializeUI();
         }
 
-        //
-        //  Handle the combo box selection event
-        //  The combo box is closed when a value is selected
-        //  so that is where we will process the selected item.
-        //
+        
+        /// <summary>
+        /// Processes the selected combo box item when the dropdown is closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkInterval_DropDownClosed(object sender, System.EventArgs e)
         {
             ComboBoxItem ComboItem = (ComboBoxItem)checkIntervalComboBox.SelectedItem;
@@ -69,13 +70,12 @@ namespace SourceCC.Service.Manager
             {
                 Config.Write("CheckInterval", interval, "Checking");
                 Config.Write("NextRun", new UnixTimestamp().Timestamp.ToString(), "Operation");
-                ReloadConfig();
             }
         }
 
-        //
-        //  Sets up the big install/uninstall button
-        //
+        /// <summary>
+        /// Sets up the big install/uninstall button
+        /// </summary>
         private void InitializeUI()
         {
             this.installationButton.Content = serviceExists ? "Uninstall Service" : "Install Service";
@@ -119,10 +119,10 @@ namespace SourceCC.Service.Manager
             }
         }
 
-        //
-        //  Load the configuration file or create it (and then load) if it doesn't exist
-        //
-        private void LoadConfigFile()
+        /// <summary>
+        /// Load the configuration file or create it (and then load) if it doesn't exist
+        /// </summary>
+        private void LoadConfig()
         {
             if (File.Exists(configFile))
             {
@@ -137,11 +137,6 @@ namespace SourceCC.Service.Manager
                 ini.Write("NextRun", now.ToString(), "Operation");
                 Config = ini;
             }
-        }
-
-        private void ReloadConfig()
-        {
-            Config = new INI(configFile);
         }
     }
 }
