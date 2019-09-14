@@ -149,7 +149,7 @@ namespace SourceCC
                 INI cfg = new INI(configPath);
                 cfg.Write("Tf2", Classes.Constants.TF2DefaultPath, "Folders");
                 cfg.Write("L4d2", Classes.Constants.L4D2DefaultPath, "Folders");
-                cfg.Write("DeleteZtmp", "true", "Files");
+                cfg.Write("DeleteZtmp", "false", "Files");
                 Config = cfg;
             }
             else
