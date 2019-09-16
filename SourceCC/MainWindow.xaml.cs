@@ -108,9 +108,12 @@ namespace SourceCC
         private void DeleteFiles(string dir, IProgress<string> deletedFile, out int foundFiles)
         {
             //  Before we start deleting files, let's read the config and update the list of files to look for from the config.
-            //  Todo: rewrite this system
-            if (Config.KeyExists("DeleteZtmp", "Files") && bool.Parse(Config.Read("DeleteZtmp", "Files")))
-                targetFiles.Add(".ztmp");
+            if (Config.KeyExists("ExtraFiles", "Files"))
+            {
+                string[] extraFiles = Config.Read("ExtraFiles", "Files").Split(',');
+                foreach (string file in extraFiles)
+                    targetFiles.Add(file);
+            }
 
             //  Time to start looking through files!
             int ff = 0;
@@ -149,12 +152,22 @@ namespace SourceCC
                 INI cfg = new INI(configPath);
                 cfg.Write("Tf2", Classes.Constants.TF2DefaultPath, "Folders");
                 cfg.Write("L4d2", Classes.Constants.L4D2DefaultPath, "Folders");
-                cfg.Write("DeleteZtmp", "false", "Files");
+                cfg.Write("ExtraFiles", ".ztmp", "Files");
                 Config = cfg;
             }
             else
             {
                 Config = new INI(configPath);
+
+                //  Handle old settings key
+                if (Config.KeyExists("DeleteZtmp", "Files"))
+                {
+                    if (bool.Parse(Config.Read("DeleteZtmp", "Files")))
+                        Config.Write("ExtraFiles", ".ztmp", "Files");
+
+                    Config.DeleteKey("DeleteZtmp", "Files");
+                    Config.Write("ExtraFiles", ".ztmp", "Files");
+                }
             }
         }
     }

@@ -35,8 +35,12 @@ namespace SourceCC.Service
             {
                 INI config = new INI(serviceConfigFile);
 
-                if (config.KeyExists("DeleteZtmp", "Files") && bool.Parse(config.Read("DeleteZtmp", "Files")))
-                    targetFiles.Add(".ztmp");
+                if (config.KeyExists("ExtraFiles", "Files"))
+                {
+                    string[] extraFiles = config.Read("ExtraFiles", "Files").Split(',');
+                    foreach (string file in extraFiles)
+                        targetFiles.Add(file);
+                }
 
                 int now = new UnixTimestamp().Timestamp;
                 int nextRun = int.Parse(config.Read("NextRun", "Operation"));

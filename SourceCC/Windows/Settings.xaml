@@ -10,19 +10,23 @@
             <StackPanel>
                 <Label Content="Team Fortress 2" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="130"/>
                 <StackPanel Orientation="Horizontal" Margin="5,0">
-                    <TextBox Name="tf2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
+                    <TextBox Name="tf2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
                     <Button Name="changeTf2Folder" Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeTf2_Click"/>
                 </StackPanel>
                 <Label Content="Left 4 Dead 2" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="130"/>
                 <StackPanel Orientation="Horizontal" Margin="5,0,5,10">
-                    <TextBox Name="l4d2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
+                    <TextBox Name="l4d2Folder" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="351"/>
                     <Button Name="changeL4d2Folder" Content="Change" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="changeL4d2_Click"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        <GroupBox Header="Files" Margin="10,0,10,10">
-            <StackPanel Margin="10" Orientation="Horizontal">
-                <CheckBox Name="filesZtmp" HorizontalAlignment="Left" Content=".ztmp" Checked="FilesZtmp_Checked" Unchecked="FilesZtmp_Unchecked" />
+        <GroupBox Header="Extra Files" Margin="10,0,10,10">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5,10,5,0">
+                    <TextBox Name="extraFilesInput" Height="23" Margin="10,0,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="351"/>
+                    <Button Name="saveExtraFiles" Content="Save" Margin="0,0,0,0" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="90" Click="SaveExtraFiles_Click"/>
+                </StackPanel>
+                <Label Content="Separate each file extension with a comma or comma + space." Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" FontSize="11" />
             </StackPanel>
         </GroupBox>
     </StackPanel>

@@ -30,7 +30,7 @@ namespace SourceCC.Windows
 
             this.tf2Folder.Text = tf2Folder;
             this.l4d2Folder.Text = l4d2Folder;
-            this.filesZtmp.IsChecked = bool.Parse(Config.Read("DeleteZtmp", "Files"));
+            this.extraFilesInput.Text = Config.Read("ExtraFiles", "Files");
         }
 
         private void changeTf2_Click(object sender, RoutedEventArgs e)
@@ -53,6 +53,19 @@ namespace SourceCC.Windows
             }
         }
 
+        private void SaveExtraFiles_Click(object sender, RoutedEventArgs e)
+        {
+            string extraFiles = this.extraFilesInput.Text;
+            //  Clean up the input
+            extraFiles = extraFiles
+                .Replace(" ", "")
+                .Replace("*", "")
+                .Trim(',', ' ');
+            Config.Write("ExtraFiles", extraFiles, "Files");
+
+            this.extraFilesInput.Text = extraFiles;
+        }
+
         private string ChooseFolder()
         {
             var folderSelector = new System.Windows.Forms.FolderBrowserDialog();
@@ -65,16 +78,6 @@ namespace SourceCC.Windows
             {
                 return null;
             }
-        }
-
-        private void FilesZtmp_Checked(object sender, RoutedEventArgs e)
-        {
-            Config.Write("DeleteZtmp", "true", "Files");
-        }
-
-        private void FilesZtmp_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Config.Write("DeleteZtmp", "false", "Files");
         }
     }
 }
