@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="SourceCC" Height="280" Width="375" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+        Title="SourceCC" Height="280" Width="375" ResizeMode="CanMinimize" SizeToContent="Height" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <ComboBox Name="directorySelector" Margin="10,10,10,0">
             <ComboBoxItem Name="tf2" Content="Team Fortress 2" IsSelected="True"/>

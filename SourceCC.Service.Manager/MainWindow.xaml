@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="SourceCC Service Manager" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+        Title="SourceCC Service Manager" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <GroupBox Header="SourceCC Service Manager" MaxWidth="400" Margin="10">
             <StackPanel Margin="5">
