@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SourceCC"
-#define MyAppVersion "1.2.0"
+#define MyAppVersion "1.2.1"
 #define MyAppPublisher "Caprine Logic"
 #define MyAppURL "https://caprine.net"
 #define MyAppExeName "SourceCC.exe"
@@ -19,7 +19,7 @@ AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName="{autopf}\{#MyAppPublisher}\{#MyAppName}"
-DisableProgramGroupPage=yes
+DisableProgramGroupPage=no
 ; The [Icons] "quicklaunchicon" entry uses {userappdata} but its [Tasks] entry has a proper IsAdminInstallMode Check.
 UsedUserAreasWarning=no
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
@@ -33,6 +33,9 @@ WizardStyle=classic
 WizardSmallImageFile=.\wizard_images\wizard_small_image_100.bmp,.\wizard_images\wizard_small_image_150.bmp,.\wizard_images\wizard_small_image_200.bmp
 WizardImageFile=.\wizard_images\wizard_image_100.bmp,.\wizard_images\wizard_image_150.bmp,.\wizard_images\wizard_image_200.bmp
 WizardResizable=no
+CloseApplications=yes
+InfoBeforeFile=intro.rtf
+InfoAfterFile=outro.rtf
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -48,6 +51,7 @@ Source: "..\SourceCC\bin\Release\CaprineNet.UnixTimestamp.dll"; DestDir: "{app}"
 Source: "..\SourceCC\bin\Release\SourceCC.Service.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\SourceCC\bin\Release\SourceCC.Service.Manager.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion isreadme
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
